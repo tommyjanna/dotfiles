@@ -24,6 +24,7 @@ alias l="ls -F" # Append indicator (one of */=>@|) to entries
 alias la="ls -lah" # List all hidden on each line with permissions
 alias h="history | tail"
 alias ..="cd .."
+alias rm="rm -i"
 # Confirm in case of accidental override
 alias mv="mv -i"
 alias cp="cp -i"
