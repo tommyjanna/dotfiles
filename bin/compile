@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# General compilation script for use with vim
+# Tommy Janna
+
+# LaTeX
+if [[ $1 == *.tex ]]
+then
+    # Compile (-halt-on-error to escape the pdflatex environment)
+    pdflatex -halt-on-error $1 > /dev/null
+
+    # Was compilation successful?
+    if [[ $? -eq 0 ]]
+    then
+        echo Compiled ${1: :-4}.pdf
+        exit 0
+    else
+        echo Error! See ${1: :-4}.log
+        exit 1
+    fi
+else
+    echo File not supported!
+    exit 1
+fi
