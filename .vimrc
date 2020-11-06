@@ -19,6 +19,9 @@ set expandtab       " When tab is pressed, insert 4 spaces.
 filetype indent on
 " Able to retab a file with spaces using :%retab
 
+" LaTeX
+noremap <C-c> :w <bar> :silent !pdflatex %<Return>
+inoremap <C-c> <Esc>:w <bar> :silent !pdflatex %<CR>
 
 """ Begin vim-plug plugin manager
 " Automated vim-plug install
