@@ -1,0 +1,7 @@
+map <C-1> feedkeys ":set recolor false<Return>"
+map <C-2> feedkeys ":set recolor true<Return>"
+
+# Thanks to (https://unix.stackexchange.com/questions/456837/zathura-shortcut-feedkeys-configuration-for-recolouring)
+# map <F3> feedkeys ":set recolor-lightcolor #0a0a12<Return>"
+# map <F4> feedkeys ":set recolor-darkcolor \#ff9900<Return>"
+# map <C-3> feedkeys "<F3><F4>"

@@ -12,8 +12,11 @@ set hlsearch                       " Highlight all matches when finding
 noremap <C-l> :nohl<Return><C-l>   " Add highlight remove to <C-l> clear command
 
 " Treats a single line wrapped onto multiple lines, as multiple lines.
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
+" Adjust accordingly for skipping multiple lines
+noremap <expr> j (v:count? 'j' : 'gj')
+noremap <expr> k (v:count? 'k' : 'gk')
 
 " Spacing
 set backspace=2     " Backspace will work like normal editor. See :help bs
@@ -58,7 +61,7 @@ noremap <C-p> :!run %<Return><Return>
 " let g:AutoPairs={'(':')', '[':']', '{':'}', '<':'>', "'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 
 " Colours
-set termguicolors
+" set termguicolors
 " set background=dark
 " colorscheme gruvbox
 " let g:gruvbox_termcolors=16
