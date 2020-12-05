@@ -16,11 +16,15 @@ fi
 HISTCONTORL=ignorespace # History ignores lines beginning with a space, or duplicate lines in history.
 shopt -s histappend # Append to history record
 
-# Aliases
+# Aliases & Functions
 alias h="history | tail"
 alias ..="cd .."
 alias l="ls -F" # Append indicator (one of */=>@|) to entries
 alias la="ls -lahF" # List all hidden on each line with permissions
+
+cdf() {
+    cd $(find . -name $1)
+}
 
 # Confirm in case of accidental override
 # alias mv="mv -i"
