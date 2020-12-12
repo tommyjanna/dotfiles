@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Make sure memorex flash drive is plugged in
+if [[ $(lsusb | grep "Imation") != "" ]] 
+then
+    # Copy files to flash drive
+else
+    echo Flash drive not inserted.
+    exit 1
+fi
