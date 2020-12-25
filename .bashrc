@@ -1,10 +1,22 @@
 # .bashrc
 # Tommy Janna
 
+if [[ $- != *i* ]]
+then
+    # Shell is non-interactive (scp, rcp, ...)
+    exit 1
+fi
+
 # Source global definitions
 if [[ -f /etc/bashrc ]]
 then
     source /etc/bashrc
+fi
+
+# Source kitty terminal completions
+if [[ -x /usr/bin/kitty ]]
+then
+    source <(kitty + complete setup bash)
 fi
 
 # Add user directory to path for custom scripts 
@@ -21,6 +33,12 @@ alias h="history | tail"
 alias ..="cd .."
 alias l="ls -F" # Append indicator (one of */=>@|) to entries
 alias la="ls -lahF" # List all hidden on each line with permissions
+alias ls="ls --color=auto"
+
+# Void power commands
+alias zzz="sudo zzz"
+alias shutdown="sudo shutdown -h now"
+alias reboot="sudo reboot"
 
 cdf() {
     cd $(find . -name $1)

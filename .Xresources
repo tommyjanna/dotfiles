@@ -40,6 +40,7 @@
 *color2:                        #859900
 *color10:                       #586e75
 
+
 !! yellow dark/light
 *color3:                        #b58900
 *color11:                       #657b83
@@ -60,11 +61,16 @@
 *color7:                        #eee8d5
 *color15:                       #fdf6e3
 
-URxvt.font:                     xft:monospace:size=11 
-URxvt.background:               [70]#002b36
+Xcursor.theme:                  Adwaita
+
+!! URxvt
+URxvt.font:                     xft:monospace:size=11,xft:Inconsolata Nerd Font Mono:size=11
+URxvt.background:               [85]#002b36
 
 URxvt.scrollBar:                false
 URxvt.depth:                    32
 
-URxvt.resize-font.smaller:      C-k
-URxvt.resize-font.bigger:       C-j
+URxvt.perl-ext-common:		    selection-to-clipboard,matcher,font-size
+
+URxvt.keysym.C-k:               font-size:decrease
+URxvt.keysym.C-j:               font-size:increase

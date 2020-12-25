@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-    rxvt-unicode 
+    kitty --single-instance 
 
 # program launcher
 super + @space
@@ -119,3 +119,30 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# rotate windows
+super + {_,shift + }r
+    bspc node @/ --rotate {90, -90}
+
+#
+# fn/media keys
+#
+
+# volume
+XF86Audio{Raise,Lower}Volume
+    pactl set-sink-volume @DEFAULT_SINK@ {+5%,-5%}
+
+# mute
+XF86AudioMute
+    pactl set-sink-mute 0 toggle
+
+ctrl + shift + {left
+    pactl next
+
+# brightness
+XF86MonBrightness{Up,Down}
+    brillo {-A,-U} 5
+
+# screenshot
+super + ctrl + s
+    scrot '%Y-%m-%d_$wx$h.png' -e 'mv --backup=numbered $f ~/Pictures/screenshots'

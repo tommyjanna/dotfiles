@@ -1,11 +1,12 @@
-#! /bin/sh
+#!/usr/bin/env bash
+# bspwmrc
+# Tommy Janna
 
 sxhkd &
-compton &
-polybar example &
+picom &
+~/.config/polybar/launch.sh &
 
-bspc monitor -n 0 -d I II III
-bspc monitor HDMI-A-0 -n 1 -d IV V VI
+bspc monitor eDP-1 -d I II III IV V VI
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -13,9 +14,36 @@ bspc config window_gap          12
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
+bspc config single_monocle       true
 
+# Start nmtui as a floating window
+bspc rule -a NM_FLOAT state=floating
+
+: ' Example rules
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+'
+
+# X theme
+if [[ -f ~/.Xresources ]]
+then
+    xrdb ~/.Xresources
+fi
+
+# urxvt server
+if [[ -x /usr/bin/urxvtd ]]
+then
+    urxvtd --quiet --opendisplay --fork
+fi
+
+# Wallpaper
+if [[ -x /usr/bin/feh ]]
+then
+    feh --bg-scale ~/Pictures/voidpurp.png
+fi
+
+# Adjust trackpad sens on my laptop
+xinput set-prop 12 244 5
