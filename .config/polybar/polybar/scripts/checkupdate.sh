@@ -4,16 +4,19 @@
 # Modified original script created by @siduck76 (https://github.com/siduck76/xbps-updates)
 
 UPD_ICON=""
-updates=$(xbps-install -Sun | cut -d' ' -f2 | sort | uniq -c | xargs)
 
-if [[ -z $updates ]]
+# Show updates vs installs
+# updates=$(xbps-install -un | cut -d' ' -f2 | sort | uniq -c | xargs)
+updates=$(xbps-install -un | wc -l)
+
+if [[ $updates == 0* ]]
 then
     echo "System is up to date."
 else
     if [[ $updates == 1* ]]
     then
-        echo "$UPD_ICON $updates"
+        echo "$UPD_ICON $updates update"
     else
-        echo "$UPD_ICON $updates""s"
+        echo "$UPD_ICON $updates updates"
     fi
 fi

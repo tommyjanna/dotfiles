@@ -16,8 +16,9 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config single_monocle       true
 
-# Start nmtui as a floating window
-bspc rule -a NM_FLOAT state=floating
+# Start the following programs in floating mode
+bspc rule -a KITTY_FLOATING state=floating rectangle=1200x600+360+240 # This is the WM_CLASS name from polybar
+bspc rule -a Pcmanfm state=floating
 
 : ' Example rules
 bspc rule -a Gimp desktop='^8' state=floating follow=on
@@ -42,8 +43,8 @@ fi
 # Wallpaper
 if [[ -x /usr/bin/feh ]]
 then
-    feh --bg-scale ~/Pictures/voidpurp.png
+    feh --bg-scale ~/Pictures/wallpaper.png
 fi
 
 # Adjust trackpad sens on my laptop
-xinput set-prop 12 244 5
+xinput set-prop 12 297 0
