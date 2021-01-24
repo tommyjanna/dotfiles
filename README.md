@@ -2,8 +2,11 @@
 A bunch of my dotfiles to quickly get started on a new system.
 
 OS: Void Linux (64-bit)
+
 Kernel: linux-lts (5.10.x)
+
 WM: bspwm + sxhkd + picom
+
 Hardware: ThinkPad E495 (Ryzen 5 3500U)
 
 ## Preview
