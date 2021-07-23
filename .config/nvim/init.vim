@@ -34,6 +34,9 @@ inoremap <C-c> <Esc>:w <bar> :!compile %<Return><Return>
 " Run/Preview script
 noremap <C-p> :!run %<Return><Return>
 
+" Disable line numbers when using :terminal
+autocmd TermOpen * setlocal nonumber norelativenumber
+
 """ Begin vim-plug plugin manager
 " Automated vim-plug install
 " if empty(glob('~/.vim/autoload/plug.vim'))
