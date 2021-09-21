@@ -44,6 +44,15 @@ cdf() {
     cd $(find . -name $1)
 }
 
+mkdirc() {
+    mkdir -p $1
+
+    if [[ $? -eq 0 ]]
+    then
+        cd $1
+    fi
+}
+
 # Confirm in case of accidental override
 # alias mv="mv -i"
 # alias cp="cp -i"
