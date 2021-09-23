@@ -27,6 +27,10 @@ set expandtab       " When tab is pressed, insert 4 spaces.
 filetype indent on
 " Able to retab a file with spaces using :%retab
 
+" Toggle spell check
+noremap <C-s> :setlocal spell!<Return>
+inoremap <C-s> :setlocal spell!<Return>
+
 " Compile script
 noremap <C-c> :w <bar> :!compile %<Return><Return>
 inoremap <C-c> <Esc>:w <bar> :!compile %<Return><Return>
