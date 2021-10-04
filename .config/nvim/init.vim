@@ -27,13 +27,18 @@ set expandtab       " When tab is pressed, insert 4 spaces.
 filetype indent on
 " Able to retab a file with spaces using :%retab
 
+" After breaking out of insert mode, return
+function! Insert()
+    call feedkeys("a")
+endfunction
+
 " Toggle spell check
 noremap <C-s> :setlocal spell!<Return>
-inoremap <C-s> :setlocal spell!<Return>
+inoremap <C-s> <Esc>:setlocal spell!<Return>:call Insert()<Return>
 
 " Compile script
 noremap <C-c> :w <bar> :!compile %<Return><Return>
-inoremap <C-c> <Esc>:w <bar> :!compile %<Return><Return>
+inoremap <C-c> <Esc>:w <bar> :!compile %<Return><Return>:call Insert()<Return>
 
 " Run/Preview script
 noremap <C-p> :!run %<Return><Return>
