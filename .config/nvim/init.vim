@@ -32,6 +32,26 @@ function! Insert()
     call feedkeys("a")
 endfunction
 
+" Switch between .c/.cpp/.cc and .h
+function! Switch()
+    let basename = expand("%:r")
+    let extension = expand("%:e")
+
+    if extension == "h"
+        if !empty(glob(basename . ".c"))
+            execute "edit" basename . ".c"
+        elseif !empty(glob(basename . ".cpp"))
+            execute "edit" basename . ".cpp"
+        elseif !empty(glob(basename . ".cc"))
+            execute "edit" basename . ".cc"
+        endif
+    elseif extension == "c" || extension == "cpp" || extension == "cc"
+        if !empty(glob(basename . ".h"))
+            execute "edit" basename . ".h"
+        endif
+    endif
+endfunction
+
 " Toggle spell check
 noremap <C-s> :setlocal spell!<Return>
 inoremap <C-s> <Esc>:setlocal spell!<Return>:call Insert()<Return>
@@ -42,6 +62,10 @@ inoremap <C-c> <Esc>:w <bar> :!compile %<Return><Return>:call Insert()<Return>
 
 " Run/Preview script
 noremap <C-p> :!run %<Return><Return>
+
+" Switch files (source/header)
+noremap <C-h> :w<Return>:call Switch()<Return>
+inoremap <C-h> <Esc>:w<Return>:call Switch()<Return>
 
 " Disable line numbers when using :terminal
 autocmd TermOpen * setlocal nonumber norelativenumber
