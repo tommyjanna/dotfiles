@@ -40,10 +40,12 @@ alias zzz="sudo zzz"
 alias shutdown="sudo shutdown -h now"
 alias reboot="sudo reboot"
 
+# cd to the first found directory with given name
 cdf() {
     cd $(find . -name $1)
 }
 
+# Create and immediately cd to new directory
 mkdirc() {
     mkdir -p $1
 
@@ -51,6 +53,12 @@ mkdirc() {
     then
         cd $1
     fi
+}
+
+# Automatically disown GUI background proesses
+gbck() {
+    $@ &
+    disown $!
 }
 
 # Confirm in case of accidental override
