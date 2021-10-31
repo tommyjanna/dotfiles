@@ -11,6 +11,8 @@ set lazyredraw      " Redraw screen only when necessary
 set hlsearch                       " Highlight all matches when finding
 noremap <C-l> :nohl<Return><C-l>   " Add highlight remove to <C-l> clear command
 
+" Reassign normal mode
+imap jk <Esc>
 " Treats a single line wrapped onto multiple lines, as multiple lines.
 noremap j gj
 noremap k gk
