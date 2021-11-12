@@ -72,6 +72,9 @@ inoremap <C-h> <Esc>:w<Return>:call Switch()<Return>
 " Disable line numbers when using :terminal
 autocmd TermOpen * setlocal nonumber norelativenumber
 
+" Remember line when reopening a file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 """ Begin vim-plug plugin manager
 " Automated vim-plug install
 " if empty(glob('~/.vim/autoload/plug.vim'))
