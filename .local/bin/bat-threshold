@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# bat-threshold.sh
+# Script to set battery charging threshold on ThinkPads using the acpi_call
+# kernel module. Requires kernel 4.17 or later.
+# Tommy Janna
+# March 7, 2022
+
+# Requires 2 arguments
+if [ $# -ne 2 ]
+then
+    echo "`basename $0`: invalid arugments"
+    echo "Try '`basename $0` <startThreshold> <stopThreshold>'"
+    exit 1
+fi
+
+# grep returns 0 if at least one line is selected.
+lsmod | grep acpi_call > /dev/null
+if [ $? -eq 0 ]
+then
+    echo $1 | sudo tee /sys/class/power_supply/BAT0/charge_start_threshold > /dev/null
+    echo $2 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold > /dev/null
+fi
