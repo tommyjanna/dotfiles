@@ -42,7 +42,29 @@ alias reboot="sudo reboot"
 
 # cd to the first found directory with given name
 cdf() {
-    cd $(find . -name $1)
+    result=( $(find . -type d -name $1) )
+    
+    if [ ${#result[@]} -gt 1 ]
+    then
+        for (( i=1; i < ${#result[@]} + 1; i++ ))
+        do
+            echo "$i) ${result[i - 1]}"
+        done
+
+        read -p $'\nSelect a directory (-1 to exit)\n>: ' directoryIndex
+        if [ $directoryIndex -gt ${#result[@]} ]
+        then
+            echo "Selection is out of bounds" >&2
+        elif [ $directoryIndex -gt 0 ]
+        then
+            cd ${result[directoryIndex - 1]}
+        fi
+    else
+        if [ ! -z $result ]
+        then
+            cd $result
+        fi
+    fi
 }
 
 # Create and immediately cd to new directory
