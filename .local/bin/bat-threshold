@@ -20,4 +20,6 @@ if [ $? -eq 0 ]
 then
     echo $1 | sudo tee /sys/class/power_supply/BAT0/charge_start_threshold > /dev/null
     echo $2 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold > /dev/null
+else
+    echo "`basename $0`: acpi_call has not been loaded into the kernel"
 fi
