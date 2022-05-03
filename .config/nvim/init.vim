@@ -38,21 +38,26 @@ endfunction
 
 " Switch between .c/.cpp/.cc and .h
 function! Switch()
-    let basename = expand("%:r")
+    let dirname = expand("%:h") . "/"
+    let basename = expand("%:t:r")
     let extension = expand("%:e")
 
     if extension == "h"
-        if !empty(glob(basename . ".c"))
-            execute "edit" basename . ".c"
-        elseif !empty(glob(basename . ".cpp"))
-            execute "edit" basename . ".cpp"
-        elseif !empty(glob(basename . ".cc"))
-            execute "edit" basename . ".cc"
-        endif
+        for dirmod in ["", "../src/", "../c/"]
+            if !empty(glob(dirname . dirmod . basename . ".c"))
+                execute "edit" dirname . dirmod . basename . ".c"
+            elseif !empty(glob(dirname . dirmod . basename . ".cpp"))
+                execute "edit" dirname . dirmod . basename . ".cpp"
+            elseif !empty(glob(dirname . dirmod . basename . ".cc"))
+                execute "edit" dirname . dirmod . basename . ".cc"
+            endif
+        endfor
     elseif extension == "c" || extension == "cpp" || extension == "cc"
-        if !empty(glob(basename . ".h"))
-            execute "edit" basename . ".h"
-        endif
+        for dirmod in ["", "../include/"]
+            if !empty(glob(dirname . dirmod . basename . ".h"))
+                execute "edit" dirname . dirmod . basename . ".h"
+            endif
+        endfor
     endif
 endfunction
 
