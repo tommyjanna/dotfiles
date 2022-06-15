@@ -38,27 +38,53 @@ endfunction
 
 " Switch between .c/.cpp/.cc and .h
 function! Switch()
-    let dirname = expand("%:h") . "/"
-    let basename = expand("%:t:r")
-    let extension = expand("%:e")
+    let l:dirname = expand("%:h") . "/"
+    let l:basename = expand("%:t:r")
+    let l:extension = expand("%:e")
 
-    if extension == "h"
+    if l:extension == "h"
         for dirmod in ["", "../src/", "../c/"]
-            if !empty(glob(dirname . dirmod . basename . ".c"))
-                execute "edit" dirname . dirmod . basename . ".c"
-            elseif !empty(glob(dirname . dirmod . basename . ".cpp"))
-                execute "edit" dirname . dirmod . basename . ".cpp"
-            elseif !empty(glob(dirname . dirmod . basename . ".cc"))
-                execute "edit" dirname . dirmod . basename . ".cc"
+            if !empty(glob(l:dirname . dirmod . l:basename . ".c"))
+                execute "edit" l:dirname . dirmod . l:basename . ".c"
+            elseif !empty(glob(l:dirname . dirmod . l:basename . ".cpp"))
+                execute "edit" l:dirname . dirmod . l:basename . ".cpp"
+            elseif !empty(glob(l:dirname . dirmod . l:basename . ".cc"))
+                execute "edit" l:dirname . dirmod . l:basename . ".cc"
             endif
         endfor
-    elseif extension == "c" || extension == "cpp" || extension == "cc"
+    elseif l:extension == "c" || l:extension == "cpp" || l:extension == "cc"
         for dirmod in ["", "../include/"]
-            if !empty(glob(dirname . dirmod . basename . ".h"))
-                execute "edit" dirname . dirmod . basename . ".h"
+            if !empty(glob(l:dirname . dirmod . l:basename . ".h"))
+                execute "edit" l:dirname . dirmod . l:basename . ".h"
             endif
         endfor
     endif
+endfunction
+
+" Rearrange a block of text to a limited number of characters per line
+function! Bound(limit)
+    " Get the length of the current line
+    let l:current = strlen(getline("."))    
+    
+    while l:current > 0
+        " Get the length of the next line
+        normal j
+        let l:next = strlen(getline("."))
+        normal k
+
+        if a:limit < l:current
+            " Jump to the limit character and insert a new line
+            execute "normal!" "0" . a:limit . "lF i\n"
+        elseif l:next > 0
+            " Append the following line onto the current line
+            normal Ji 
+        else
+            " The next line is blank, exit the loop.
+            break
+        endif
+
+        let l:current = strlen(getline("."))    
+    endwhile
 endfunction
 
 " Toggle spell check
