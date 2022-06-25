@@ -112,14 +112,14 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " let g:AutoPairs={'(':')', '[':']', '{':'}', '<':'>', "'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 
 """ Begin vim-plug plugin manager
-call plug#begin()
+"call plug#begin()
 
 " Any valid git URL is allowed
 " Shorthand notation; fetches https://github.com/user/repo
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
 
 " Initialize plugin system
-call plug#end()
+"call plug#end()
 
 """ Plugin keybinds
 " NERDTree
