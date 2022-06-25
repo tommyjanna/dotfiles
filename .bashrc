@@ -1,38 +1,57 @@
 # .bashrc
 # Tommy Janna
 
-if [[ $- != *i* ]]
+# Do not run this script if the shell is non-interactive (scp, rsync, ...).
+# Remove 'i' from the shell's launch options string and see if it changed.
+if [ "${-#*i}" == $- ]
 then
-    # Shell is non-interactive (scp, rcp, ...)
     exit 1
 fi
 
-# Source global definitions
-if [[ -f /etc/bashrc ]]
+# Source global definitions.
+if [ -f /etc/bashrc ]
 then
     source /etc/bashrc
+elif [ -f /etc/bash.bashrc ]
+then
+    source /etc/bash.bashrc
 fi
 
-# Source kitty terminal completions
-if [[ -x /usr/bin/kitty ]]
+# Source kitty terminal completions.
+if [ -x /usr/bin/kitty ]
 then
     source <(kitty + complete setup bash)
 fi
 
-# Add user directory to path for custom scripts 
-if ! [[ $PATH =~ $HOME/bin ]]
+###############################
+### Environment and Options ###
+###############################
+# Add user directory to path if it is not there already.
+if ! [[ $PATH =~ $HOME/.local/bin ]]
 then
-    PATH=$PATH:$HOME/bin
+    PATH=$PATH:$HOME/.local/bin
 fi
 
-HISTCONTORL=ignorespace # History ignores lines beginning with a space, or duplicate lines in history.
-shopt -s histappend # Append to history record
+# History ignores lines beginning with a space, or duplicate lines in history.
+HISTCONTORL=ignorespace 
+HISTSIZE=20000
 
-# Aliases & Functions
+# Append to history record.
+shopt -s histappend 
+
+# Reassign direcory colour to 1;34 (bold blue).
+LS_COLORS=$LS_COLORS:'di=1;34:'
+
+# Use vi controls in the shell.
+set -o vi
+
+###############
+### Aliases ###
+###############
 alias h="history | tail"
 alias ..="cd .."
-alias l="ls -F" # Append indicator (one of */=>@|) to entries
-alias la="ls -lahF" # List all hidden on each line with permissions
+alias l="ls -F" # Append indicator (one of */=>@|) to entries.
+alias la="ls -lahF"
 alias ls="ls --color=auto"
 
 # Void power commands
@@ -40,13 +59,18 @@ alias zzz="sudo zzz"
 alias shutdown="sudo shutdown -h now"
 alias reboot="sudo reboot"
 
-# cd to the first found directory with given name
+#################
+### Functions ###
+#################
+# cd to the directories from the find command
 cdf() {
     #result=( $(find . -type d -name "$1" -print0) )
     readarray -d '' result < <(find . -name "$1" -print0)
 
     if [ ${#result[@]} -gt 1 ]
     then
+        # More than one match, list all the directories and offer the user a
+        # choice
         for (( i=1; i < ${#result[@]} + 1; i++ ))
         do
             echo "$i) ${result[i - 1]}"
@@ -72,7 +96,7 @@ cdf() {
 mkdirc() {
     mkdir -p $1
 
-    if [[ $? -eq 0 ]]
+    if [ $? -eq 0 ]
     then
         cd $1
     fi
@@ -84,18 +108,12 @@ gbck() {
     disown $!
 }
 
-# Confirm in case of accidental override
-# alias mv="mv -i"
-# alias cp="cp -i"
-# alias rm="rm -i"
-
-# Utilize vi controls in the shell
-set -o vi
-
+##############
+### Prompt ###
+##############
 # Shell prompt and colours
 color_prompt=yes
 
-# Prompt
 # \u    user
 # \h    host
 # \W    working directory
@@ -117,12 +135,3 @@ PS1="\[${WHITE}\][\u\[${GREY}\]@\\[${WHITE}\]\h: \[${BBLUE}\]\W\[${WHITE}\]]\[${
 
 # Alternative
 # PS1="[\e[33m\u\e[37m@\e[36m\h\e[39m: \e[1m\W\e[0m]\e[1;34m\\$ \e[0;39m"
-
-# Reassign direcory colour to 1;34 (bold blue)
-LS_COLORS=$LS_COLORS:'di=1;34:'
-
-# Just for fun :)
-if [[ -x $(command -v neofetch) ]]
-then
-    neofetch
-fi
