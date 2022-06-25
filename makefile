@@ -1,17 +1,17 @@
 all: install
 
 install:
-	cp    .bash_profile ${HOME}/
-	cp    .bashrc       ${HOME}/
-	cp -r .config/      ${HOME}/
-	cp -r .local/       ${HOME}/
-	cp    .xinitrc      ${HOME}/
-	cp    .Xresources   ${HOME}/
+	cp -i  .bash_profile ${HOME}/
+	cp -i  .bashrc       ${HOME}/
+	cp -ir .config/      ${HOME}/
+	cp -ir .local/       ${HOME}/
+	cp -i  .xinitrc      ${HOME}/
+	cp -i  .Xresources   ${HOME}/
 
 update:
-	cp    ${HOME}/.bash_profile .
-	cp    ${HOME}/.bashrc       .
-	cp -r ${HOME}/.config       .
-	cp -r ${HOME}/.local        .
-	cp    ${HOME}/.xinitrc      .
-	cp    ${HOME}/.Xresources   .
+	cp -i  ${HOME}/.bash_profile .
+	cp -i  ${HOME}/.bashrc       .
+	cp -ir ${HOME}/.config       .
+	cp -ir ${HOME}/.local        .
+	cp -i  ${HOME}/.xinitrc      .
+	cp -i  ${HOME}/.Xresources   .
