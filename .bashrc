@@ -44,6 +44,9 @@ LS_COLORS=$LS_COLORS:'di=1;34:'
 
 # Use vi controls in the shell.
 set -o vi
+bind '"jk":vi-movement-mode'
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 
 ###############
 ### Aliases ###
