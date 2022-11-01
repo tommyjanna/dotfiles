@@ -111,6 +111,11 @@ gbck() {
     disown $!
 }
 
+# Search history
+hgrep() {
+    history | grep $1
+}
+
 ##############
 ### Prompt ###
 ##############
