@@ -139,7 +139,8 @@ BGREEN="\e[1;32m"
 BBLUE="\e[1;34m"
 
 # Prompt
-PS1="\[${WHITE}\][\u\[${GREY}\]@\\[${WHITE}\]\h: \[${BBLUE}\]\W\[${WHITE}\]]\[${BGREEN}\]\\$ \[${WHITE}\]"
+PROMPT_DIRTRIM=4 # Limit \w pwd length to 4 directories
+PS1="\[${WHITE}\][\u\[${GREY}\]@\\[${WHITE}\]\h: \[${BBLUE}\]\w\[${WHITE}\]]\[${BGREEN}\]\\$ \[${WHITE}\]"
 
 # Alternative
 # PS1="[\e[33m\u\e[37m@\e[36m\h\e[39m: \e[1m\W\e[0m]\e[1;34m\\$ \e[0;39m"
