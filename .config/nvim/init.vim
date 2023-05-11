@@ -31,6 +31,12 @@ set expandtab       " When tab is pressed, insert 4 spaces.
 filetype indent on
 " Able to retab a file with spaces using :%retab
 
+" Show trailing whitespace
+set listchars=trail:~
+set list
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
 " After breaking out of insert mode, return
 function! Insert()
     call feedkeys("a")
